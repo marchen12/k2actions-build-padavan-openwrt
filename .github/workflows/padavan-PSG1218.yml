@@ -45,9 +45,14 @@ jobs:
           ./padavan.sh $DEVICES -s -l -o $OUT_DIR # 编译 DEVICES 显示详细日志 关闭代理 修改登录页
           echo "::set-env name=FILE_NAME::$DEVICES-$(date "+%Y%m%d")"  # 包名
           echo "::set-env name=IMAGES_PATH::$OUT_DIR"                  # 打包目录
-      - name: Upload Packages # 4. 打包文件并且上传到当前主分支
-        uses: actions/upload-artifact@master
+   #   - name: Upload Packages # 4. 打包文件并且上传到当前主分支
+   #     uses: actions/upload-artifact@master
    #     if: env.UPLOAD_FIRMWARE == 'true' && success() # 成功才执行
+   #     with:
+   #       name: Padavan-${{env.FILE_NAME}}
+   #       path: ${{ env.IMAGES_PATH }} - name : Upload artifact
+      - name : Upload artifact
+        uses: actions/upload-artifact@master
         with:
-          name: Padavan-${{env.FILE_NAME}}
-          path: ${{ env.IMAGES_PATH }}
+          name:  Padavan
+          path: Padavan/bin
